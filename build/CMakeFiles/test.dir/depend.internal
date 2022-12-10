@@ -1838,43 +1838,6 @@ CMakeFiles/test.dir/home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_st
  /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  generated/pico_base/pico/config_autogen.h
  generated/pico_base/pico/version.h
-CMakeFiles/test.dir/home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/boards/include/boards/pico.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_base/include/pico.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_base/include/pico/config.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_base/include/pico/error.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_base/include/pico/types.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/code.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/defs.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/structure.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_bank0.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c
- generated/pico_base/pico/config_autogen.h
- generated/pico_base/pico/version.h
 CMakeFiles/test.dir/home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
  /home/chapahrroh/RB_pico/pico/pico-sdk/lib/tinyusb/src/class/audio/audio.h
  /home/chapahrroh/RB_pico/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.h
@@ -2208,7 +2171,6 @@ CMakeFiles/test.dir/test.c.obj
  /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h
  /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
- /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h
  /home/chapahrroh/RB_pico/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  generated/pico_base/pico/config_autogen.h
  generated/pico_base/pico/version.h
