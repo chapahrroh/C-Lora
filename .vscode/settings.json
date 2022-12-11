@@ -7,5 +7,6 @@
         "structure.h": "c",
         "spi.h": "c",
         "string.h": "c"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
