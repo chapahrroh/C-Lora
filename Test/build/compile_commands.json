@@ -1,0 +1,46 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "CMakeCCompilerId.c"
+    ],
+    "directory": "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/3.25.1/CompilerIdC",
+    "file": "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/3.25.1/CompilerIdC/CMakeCCompilerId.c"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-c",
+      "CMakeCXXCompilerId.cpp"
+    ],
+    "directory": "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/3.25.1/CompilerIdCXX",
+    "file": "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/3.25.1/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-v",
+      "-c",
+      "-o",
+      "CMakeFiles/cmTC_ef272.dir/CMakeCCompilerABI.c.o",
+      "/usr/share/cmake/Modules/CMakeCCompilerABI.c"
+    ],
+    "directory": "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/CMakeScratch/TryCompile-NmmKRB",
+    "file": "/usr/share/cmake/Modules/CMakeCCompilerABI.c",
+    "output": "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/CMakeScratch/TryCompile-NmmKRB/CMakeFiles/cmTC_ef272.dir/CMakeCCompilerABI.c.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-v",
+      "-c",
+      "-o",
+      "CMakeFiles/cmTC_80c5c.dir/CMakeCXXCompilerABI.cpp.o",
+      "/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+    ],
+    "directory": "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/CMakeScratch/TryCompile-rX1RXv",
+    "file": "/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp",
+    "output": "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/CMakeScratch/TryCompile-rX1RXv/CMakeFiles/cmTC_80c5c.dir/CMakeCXXCompilerABI.cpp.o"
+  }
+]

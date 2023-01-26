@@ -1,5 +1,5 @@
 CMakeFiles/test.dir/test.c.o: \
- /home/chapahrroh/Documents/Proyectos/C/Test/test.c \
+ /home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/test.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/bits/libc-header-start.h /usr/include/features.h \
  /usr/include/features-time64.h /usr/include/bits/wordsize.h \

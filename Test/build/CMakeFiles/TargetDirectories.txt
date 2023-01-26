@@ -1,3 +1,3 @@
-/home/chapahrroh/Documents/Proyectos/C/Test/build/CMakeFiles/test.dir
-/home/chapahrroh/Documents/Proyectos/C/Test/build/CMakeFiles/edit_cache.dir
-/home/chapahrroh/Documents/Proyectos/C/Test/build/CMakeFiles/rebuild_cache.dir
+/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/test.dir
+/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/edit_cache.dir
+/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/CMakeFiles/rebuild_cache.dir

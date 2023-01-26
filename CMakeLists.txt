@@ -4,12 +4,10 @@ project(test_project C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
-add_executable(test
-  test.c
-)
-pico_enable_stdio_usb(test 1)
-pico_enable_stdio_uart(test 0)
-pico_add_extra_outputs(test)
-target_link_libraries(test pico_stdlib)
-#target_link_libraries(test  hardware_spi)
+add_executable(inverLora inverLora.cpp)
+pico_enable_stdio_usb(inverLora 0)
+pico_enable_stdio_uart(inverLora 1)
+pico_add_extra_outputs(inverLora)
+target_link_libraries(inverLora pico_stdlib)
+target_link_libraries(inverLora hardware_spi)
 

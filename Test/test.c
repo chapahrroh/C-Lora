@@ -21,7 +21,7 @@ void reloj(char caracter){
      }
 }
 
-void recBin(char binario){
+void recBin(long binario){
     int n,c,k;
     int tamano;
     n = binario;
@@ -56,13 +56,29 @@ int unBit(int dato, int pos){
 
 int main(){
    
-    int numTest = 3;
+    long numTest = 500E6;
 
     recBin(numTest);
 
     printf("%d",unBit(numTest, 0));
 
+    int bits = ((sizeof(long)*8)-1);
+    int byts = sizeof(long);
+    printf("tipo de dato long tiene %d bits\n",bits);
+    printf("tipo de dato long tiene %d byts\n",byts);
+
+    numTest = (numTest << 19)/32000000 ;
+
+    char MSB = numTest >> 16;
+    char MID = numTest >> 8;
+    char LSB = numTest >> 0;
+
+    recBin(numTest);
+    printf("MSB =");
+    recBin(MSB);
+    
     return 0;
+
 }
 
 

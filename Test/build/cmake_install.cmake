@@ -1,4 +1,4 @@
-# Install script for directory: /home/chapahrroh/Documents/Proyectos/C/Test
+# Install script for directory: /home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/chapahrroh/Documents/Proyectos/C/Test/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/chapahrroh/Documentos/Proyectos/Pogramacion/C/C-LORA/Test/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
