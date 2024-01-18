@@ -8,6 +8,7 @@ add_executable(inverLora inverLora.cpp)
 pico_enable_stdio_usb(inverLora 0)
 pico_enable_stdio_uart(inverLora 1)
 pico_add_extra_outputs(inverLora)
-target_link_libraries(inverLora pico_stdlib)
-target_link_libraries(inverLora hardware_spi)
+add_subdirectory(src)
+target_link_libraries(inverLora pico_stdlib hardware_spi Loralib)
+
 

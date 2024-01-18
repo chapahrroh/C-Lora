@@ -1,4 +1,4 @@
-#include "inverLora.h"
+#include "src/Loralib.h"
 
 int main() {
     int status = 0;
