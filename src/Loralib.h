@@ -1,3 +1,6 @@
+#ifndef LORALIB_H
+#define LORALIB_H
+
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
@@ -38,23 +41,25 @@ class LoRa {
     public:
 
     //variables de la clase
-        long _frecuencia;
 
     // funciones de la clase
-                LoRa();
+        LoRa(); // constructor
+
+        int     iniciarLoRa(long frecuencia);
+        void    terminarLoRa();
         uint8_t transSimple(uint8_t direccion, uint8_t valor);
         uint8_t leerRegistro(uint8_t direccion);
         void    escribirRegistro(uint8_t direccion, uint8_t valor);
         void    reset();
-        int     iniciarLoRa(long frecuencia);
         void    setFrecuencia(long frecuencia);
         void    setPotenciaTX(int nivel);
         void    setOCP(uint8_t mA);
         void    dormir();
         void    espera();
 
+    private:
+        long _frecuencia;
 };
 
-
-
-// Constructor de la clase
+extern LoRa lora;
+#endif

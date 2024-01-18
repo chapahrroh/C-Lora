@@ -1,15 +1,15 @@
 #include "Loralib.h"
 
 LoRa::LoRa(){
-        
+
     gpio_init(LORA_RESET);
     gpio_set_dir(LORA_RESET,GPIO_OUT);
-        
+
     spi_init(SPI_PORT, 12500);
     gpio_set_function(PIN_MISO, GPIO_FUNC_SPI);
     gpio_set_function(PIN_SCK, GPIO_FUNC_SPI) ;
     gpio_set_function(PIN_MOSI, GPIO_FUNC_SPI);
-    
+
     gpio_init(PIN_CS);
     gpio_set_dir(PIN_CS, GPIO_OUT);
     gpio_put(PIN_CS, 1);
@@ -19,12 +19,12 @@ LoRa::LoRa(){
 // funcion de inicio del trasnductor
 int LoRa::iniciarLoRa(long frecuencia){
     reset();
-        
+
     uint8_t version = leerRegistro(0x42);
         if(version != 0x12){
             printf("falla conexion LORA\n");
         }
-    
+
     // pone el transductor en estado "sleep"
     dormir();
 
@@ -37,22 +37,27 @@ int LoRa::iniciarLoRa(long frecuencia){
 
     // establece boost LNA (amplificacion de senal)
     escribirRegistro(REG_LNA,leerRegistro(REG_LNA) | 0x03);
-    
+
     // se establece Ganancia LNA en automativo (auto AGC)
     escribirRegistro(REG_MODEM_CONFIG_3, 0x04);
-    
-    // se fija potencia de salida en 17 DBm
-    setPotenciaTX(17);  
 
-    // se pone el equipo en standby 
+    // se fija potencia de salida en 17 DBm
+    setPotenciaTX(17);
+
+    // se pone el equipo en standby
     espera();
 
     return 1;
 }
 
+void LoRa::terminarLoRa(){
+    dormir();
+    spi_deinit(SPI_PORT);
+}
+
 // reset del transductor LoRa
 void LoRa::reset(){
-    gpio_put(LORA_RESET,0); 
+    gpio_put(LORA_RESET,0);
     sleep_ms(10);
     gpio_put(LORA_RESET,1);
     sleep_ms(10);
@@ -113,7 +118,7 @@ void LoRa::setPotenciaTX(int nivel){
         }
 
         nivel -= 3;   // se restan 3 para mantener el rango maximo de 17
-        escribirRegistro(REG_PA_DAC,0x87); // abilita salida de 20 DBm 
+        escribirRegistro(REG_PA_DAC,0x87); // abilita salida de 20 DBm
         setOCP(140);   // setea corriente maxima en 140 mA
 
     }
@@ -135,10 +140,12 @@ void LoRa::setOCP(uint8_t mA){
 
     if (mA <= 120) {
         ocpTrim = (mA - 45) / 5;
-    } 
+    }
     else if (mA <=240) {
         ocpTrim = (mA + 30) / 10;
     }
 
     escribirRegistro(REG_OCP, 0x20 | (0x1f & ocpTrim));  //0x20 abilita la proteccion de sobrecorriente y el 0x1f limita el OCP a 23 , limitando la corriente maxima a 200 mA (por catalogo soporta 240 mA)
 }
+
+LoRa lora;
