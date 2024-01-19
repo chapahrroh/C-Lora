@@ -1,6 +1,6 @@
 #include "Loralib.h"
 
-using namespace Inverlora::nodo;
+using namespace InverLoRa::nodo;
 
 LoRa::LoRa():
     _spi(SPI_PORT),
@@ -257,4 +257,4 @@ void LoRa::modoFsRx(){
     escribirRegistro(REG_OP_MODE, MODO_FSK | MODO_FS_RX);
 }
 
-LoRa lora;
+// LoRa lora;

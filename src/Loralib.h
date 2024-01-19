@@ -6,7 +6,7 @@
 #include "pico/binary_info.h"
 #include "hardware/spi.h"
 
-namespace Inverlora
+namespace InverLoRa
 {
     namespace nodo
     {
