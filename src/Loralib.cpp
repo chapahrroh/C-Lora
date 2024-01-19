@@ -1,58 +1,121 @@
 #include "Loralib.h"
 
-LoRa::LoRa(){
+LoRa::LoRa():
+    _spi(SPI_PORT),
+    _reset(LORA_RESET),
+    _cs(PIN_CS),
+    _dio0(LORA_DIO0),
+    _frecuencia(0),
+    _cabeseraImplicita(0)
+{}
 
-    gpio_init(LORA_RESET);
-    gpio_set_dir(LORA_RESET,GPIO_OUT);
+// funcion de inicio del trasnductor
+bool LoRa::iniciarLoRa(long frecuencia){
 
+    // seteo de pin CS
+    gpio_init(_cs);
+    gpio_set_dir(_cs, GPIO_OUT);
+    gpio_put(_cs, 1);
+
+    // seteo de pin reset
+    if(_reset != -1){
+        gpio_init(_reset);
+        gpio_set_dir(_reset,GPIO_OUT);
+        reset();
+    }
+
+    // start SPI
     spi_init(SPI_PORT, 12500);
     gpio_set_function(PIN_MISO, GPIO_FUNC_SPI);
     gpio_set_function(PIN_SCK, GPIO_FUNC_SPI) ;
     gpio_set_function(PIN_MOSI, GPIO_FUNC_SPI);
 
-    gpio_init(PIN_CS);
-    gpio_set_dir(PIN_CS, GPIO_OUT);
-    gpio_put(PIN_CS, 1);
 
-}
+    // Make the SPI pins available to picotool
+    bi_decl(bi_3pins_with_func(PIN_MISO, PIN_MOSI, PIN_SCK, GPIO_FUNC_SPI));
+    bi_decl(bi_1pin_with_name(PIN_CS, "SPI CS"));
 
-// funcion de inicio del trasnductor
-int LoRa::iniciarLoRa(long frecuencia){
-    reset();
-
+    // chequeo de version
     uint8_t version = leerRegistro(0x42);
         if(version != 0x12){
             printf("falla conexion LORA\n");
         }
 
     // pone el transductor en estado "sleep"
-    dormir();
+    dormir(MODE_LONG_RANGE_MODE);
 
     // establece la frecuencia de funcionamiento del transductor(solo se puede utilizar con el transductor en modo sleep o standby)
     setFrecuencia(frecuencia);
 
     // establese FIFOS TX y RX a 0
-    escribirRegistro(REG_FIFO_TX_DIR_BASE, 0);
-    escribirRegistro(REG_FIFO_RX_DIR_BASE, 0);
+    resetFIFO();
 
     // establece boost LNA (amplificacion de senal)
     escribirRegistro(REG_LNA,leerRegistro(REG_LNA) | 0x03);
 
-    // se establece Ganancia LNA en automativo (auto AGC)
+    // se establece Ganancia LNA en automatico (auto AGC)
     escribirRegistro(REG_MODEM_CONFIG_3, 0x04);
 
     // se fija potencia de salida en 17 DBm
     setPotenciaTX(17);
 
     // se pone el equipo en standby
-    espera();
+    espera(MODE_LONG_RANGE_MODE);
 
     return 1;
 }
 
 void LoRa::terminarLoRa(){
-    dormir();
+    dormir(MODE_LONG_RANGE_MODE);
     spi_deinit(SPI_PORT);
+}
+
+bool LoRa::crearPaquete(int cabeseraImplicita)
+{
+    if(transmitiendo()){
+        return 0;
+    }
+
+    espera(MODE_LONG_RANGE_MODE);
+
+    if(cabeseraImplicita){
+        modoCabeseraImplicita();
+    }
+    else{
+        modoCabeseraExplicita();
+    }
+
+    resetFIFO();
+    return 1;
+}
+
+bool LoRa::finalizarPaquete(bool async)
+{
+    if(async && _onTxDone){
+        escribirRegistro(REG_MAPEO_DIO_1, 0x40); // DIO0 => TXDONE
+    }
+
+    escribirRegistro(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODO_TX);
+
+    if(!async){
+        while((leerRegistro(REG_VANDERA_IRQ) & MAS_IRQ_TX_DONE) == 0){
+            sleep_ms(0);
+        }
+        // limpiar vandera IRQ
+        escribirRegistro(REG_VANDERA_IRQ, MAS_IRQ_TX_DONE);
+    }
+    return 1;
+}
+
+bool LoRa::transmitiendo(){
+    if((leerRegistro(REG_OP_MODE) & MODO_TX) == MODO_TX){
+        return 1;
+    }
+
+    if(leerRegistro(REG_VANDERA_IRQ) & MAS_IRQ_TX_DONE){
+        escribirRegistro(REG_VANDERA_IRQ, MAS_IRQ_TX_DONE);
+    }
+    return 0;
 }
 
 // reset del transductor LoRa
@@ -63,17 +126,33 @@ void LoRa::reset(){
     sleep_ms(10);
 }
 
+void LoRa::resetFIFO(){
+    escribirRegistro(REG_FIFO_TX_DIR_BASE, 0);
+    escribirRegistro(REG_FIFO_RX_DIR_BASE, 0);
+}
+
 // modos del trasnductor
 // modo dormir
-void LoRa::dormir(){
-    escribirRegistro(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_SLEEP);
+void LoRa::dormir(uint8_t modo){
+    escribirRegistro(REG_OP_MODE, modo | MODE_SLEEP);
 }
 
 // modo espera
-void LoRa::espera(){
-    escribirRegistro(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODO_ESPERA);
+void LoRa::espera(uint8_t modo){
+    escribirRegistro(REG_OP_MODE, modo | MODO_ESPERA);
 }
 
+// modo cabesera implicita
+void LoRa::modoCabeseraImplicita(){
+    _cabeseraImplicita = 1;
+    escribirRegistro(REG_MODEM_CONFIG_1, leerRegistro(REG_MODEM_CONFIG_1) | 0x01);
+}
+
+// modo cabesera explicita
+void LoRa::modoCabeseraExplicita(){
+    _cabeseraImplicita = 0;
+    escribirRegistro(REG_MODEM_CONFIG_1, leerRegistro(REG_MODEM_CONFIG_1) & 0xfe);
+}
 
 // seteo de frecuencia
 void LoRa::setFrecuencia(long frecuencia){
@@ -146,6 +225,34 @@ void LoRa::setOCP(uint8_t mA){
     }
 
     escribirRegistro(REG_OCP, 0x20 | (0x1f & ocpTrim));  //0x20 abilita la proteccion de sobrecorriente y el 0x1f limita el OCP a 23 , limitando la corriente maxima a 200 mA (por catalogo soporta 240 mA)
+}
+
+int LoRa::tempSX1276(){
+    int     temprow = 0;
+    uint8_t modoActual = leerRegistro(REG_OP_MODE);
+
+    if((modoActual & MODE_LONG_RANGE_MODE) == MODE_LONG_RANGE_MODE){
+        dormir(MODE_LONG_RANGE_MODE);
+    }
+
+    dormir(MODO_FSK);
+    modoFsRx();
+    escribirRegistro(REG_IMAGE_CAL, 0x01);
+    sleep_ms(150);
+    escribirRegistro(REG_IMAGE_CAL, 0x00);
+    dormir(MODO_FSK);
+    temprow = leerRegistro(REG_TEMP);
+
+    if((modoActual & MODE_LONG_RANGE_MODE) == MODE_LONG_RANGE_MODE){
+        dormir(MODE_LONG_RANGE_MODE);
+    }
+
+    escribirRegistro(REG_OP_MODE, modoActual);
+    return temprow;
+}
+
+void LoRa::modoFsRx(){
+    escribirRegistro(REG_OP_MODE, MODO_FSK | MODO_FS_RX);
 }
 
 LoRa lora;
