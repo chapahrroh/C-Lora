@@ -1,11 +1,13 @@
 #include "src/Loralib.h"
 
+using namespace InverLoRa::nodo;
+
 int main() {
     int status = 0;
     int compensacionTemp = -197;
 
     stdio_init_all();
-    // LoRa lora;
+    LoRa lora;
 
     status = lora.iniciarLoRa(915E6);
 
