@@ -1,5 +1,7 @@
 #include "Loralib.h"
 
+using namespace Inverlora::nodo;
+
 LoRa::LoRa():
     _spi(SPI_PORT),
     _reset(LORA_RESET),
