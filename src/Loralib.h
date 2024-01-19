@@ -99,7 +99,7 @@ namespace Inverlora
 
         };
 
-        extern LoRa lora;
+        // extern LoRa lora;
     }
 }
 // extern LoRa lora;
